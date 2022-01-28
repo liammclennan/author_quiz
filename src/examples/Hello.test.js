@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Enzyme, { shallow } from "enzyme";
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 function Hello(props) {
     return <h1>Hello at {props.now}</h1>;

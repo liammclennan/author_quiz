@@ -92,17 +92,18 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const AuthorQuiz = connect(mapStateToProps, mapDispatchToProps)(
-  function ({turnData, highlight, onAnswerSelected, onContinue}) {
-    return (
-      <div className="container-fluid">
-        <Hero />
-        <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-        <Continue show={highlight === 'correct'} onContinue={onContinue}/>
-        <p><Link to="/add">Add an author</Link></p>
-        <Footer />
-      </div>
-    );
-  });
+const AuthorQuiz = function ({turnData, highlight, onAnswerSelected, onContinue}) {
+  return (
+    <div className="container-fluid">
+      <Hero />
+      <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
+      <Continue show={highlight === 'correct'} onContinue={onContinue}/>
+      <p><Link to="/add">Add an author</Link></p>
+      <Footer />
+    </div>
+  );
+};
+
+const AuthorQuizConnected = connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);
 
 export default AuthorQuiz;

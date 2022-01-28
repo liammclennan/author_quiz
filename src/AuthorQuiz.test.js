@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AuthorQuiz from './AuthorQuiz';
 import Enzyme, {mount, shallow, render} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 Enzyme.configure({ adapter: new Adapter() });
 
 const state = {
@@ -21,13 +22,13 @@ const state = {
 describe("Author Quiz", () => {
     it("renders without crashing", () => {
         const div = document.createElement("div");
-        ReactDOM.render(<AuthorQuiz {...state} onAnswerSelected={()=>{}} />, div);
+        ReactDOM.render(<Router><AuthorQuiz {...state} onAnswerSelected={()=>{}} /></Router>, div);
     });
 
     describe("When no answer has been selected", ()=>{
         let wrapper;
         beforeAll(()=> {
-            wrapper = mount(<AuthorQuiz {...state} onAnswerSelected={()=> {}}/>);
+            wrapper = mount(<Router><AuthorQuiz {...state} onAnswerSelected={()=> {}}/></Router>);
         });
 
         it("should have no background color", () => {
@@ -40,7 +41,7 @@ describe("Author Quiz", () => {
     
         beforeAll(() => {
           wrapper = mount(
-            <AuthorQuiz {...(Object.assign({}, state, {highlight: 'wrong'}))} onAnswerSelected={()=>{}} />);
+            <Router><AuthorQuiz {...(Object.assign({}, state, {highlight: 'wrong'}))} onAnswerSelected={()=>{}} /></Router>);
         });
     
         it('should have a red background color', () => {
@@ -53,7 +54,7 @@ describe("Author Quiz", () => {
     
         beforeAll(() => {
           wrapper = mount(
-            <AuthorQuiz {...(Object.assign({}, state, {highlight: 'correct'}))} onAnswerSelected={()=>{}} />);
+            <Router><AuthorQuiz {...(Object.assign({}, state, {highlight: 'correct'}))} onAnswerSelected={()=>{}} /></Router>);
         });
     
         it('should have a green background color', () => {
@@ -61,22 +62,4 @@ describe("Author Quiz", () => {
         });        
       });
 
-      describe("When the first answer is selected", ()=>{
-          let wrapper;
-          const handleAnswerSelected = jest.fn();
-
-          beforeAll(()=>{
-            wrapper = mount(
-                <AuthorQuiz {...state} onAnswerSelected={handleAnswerSelected} />);
-            wrapper.find('.answer').first().simulate('click');    
-          });
-
-          it("onAnswerSelected should be called", ()=>{
-              expect(handleAnswerSelected).toHaveBeenCalled();
-          });
-
-          it("should receive The Shining", ()=>{
-              expect(handleAnswerSelected).toHaveBeenCalledWith("The Shining");
-          });
-      });
 });
