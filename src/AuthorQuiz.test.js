@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AuthorQuiz from './AuthorQuiz';
+import { AuthorQuiz } from './AuthorQuiz';
 import Enzyme, {mount, shallow, render} from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';

@@ -92,7 +92,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const AuthorQuiz = function ({turnData, highlight, onAnswerSelected, onContinue}) {
+export const AuthorQuiz = function ({turnData, highlight, onAnswerSelected, onContinue}) {
   return (
     <div className="container-fluid">
       <Hero />
@@ -106,4 +106,4 @@ const AuthorQuiz = function ({turnData, highlight, onAnswerSelected, onContinue}
 
 const AuthorQuizConnected = connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);
 
-export default AuthorQuiz;
+export default AuthorQuizConnected;
